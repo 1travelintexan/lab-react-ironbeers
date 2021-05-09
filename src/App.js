@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import axios from 'axios';
+import { Route, Switch, Link } from 'react-router-dom';
 import './App.css';
 import Home from './components/Home';
 import RandomBeer from './components/Random-Beer';
@@ -11,10 +12,19 @@ class App extends Component {
     beers: [],
   };
 
+  componentDidMount = () => {
+    axios.get('https://ih-beers-api2.herokuapp.com/beers').then((response) => {
+      this.setState({ beers: response.data });
+    });
+  };
+
   render() {
     const { beers } = this.state;
     return (
       <div className="App">
+        <nav>
+          <Link to="/">Home</Link>
+        </nav>
         <Home />
 
         <Switch>
