@@ -1,21 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Header from './Header';
 
-class Beers extends Component {
-  render() {
-    const { beers } = this.props;
-    console.log(this.props);
-    return (
-      <div>
-        <h2> List of Beers!</h2>
-        {beers.map((beer) => {
-          return (
-            (<img src={beer.image_url} height="150" />),
-            (<h2>{beer.name}</h2>),
-            (<h3>{beer.tagline}</h3>)
-          );
-        })}
-      </div>
-    );
-  }
+function Beers({ beers }) {
+  return (
+    <div>
+      <Header />
+      {beers.map((elem, i) => {
+        return (
+          <Link to={`/beers/${elem._id}`}>
+            <div key={elem + i} className="beer">
+              <img
+                src={elem.image_url}
+                alt="beer image"
+                style={{ height: '200px' }}
+              />
+              <div>
+                <h3>{elem.name}</h3>
+                <h3>{elem.tagline}</h3>
+                <h5>Create by:{elem.contributed_by}</h5>
+              </div>
+            </div>
+          </Link>
+        );
+      })}
+    </div>
+  );
 }
+
 export default Beers;
