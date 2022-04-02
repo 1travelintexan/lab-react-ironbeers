@@ -1,15 +1,22 @@
 import React from 'react';
+
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+import SearchBeer from './SearchBeer';
 
-function Beers({ beers }) {
+function Beers({ beers, handleFilter }) {
+  if (!beers) {
+    return <p>Loading...</p>;
+  }
   return (
     <div>
       <Header />
+      <SearchBeer handleFilter={handleFilter} />
       {beers.map((elem, i) => {
         return (
-          <Link to={`/beers/${elem._id}`}>
-            <div key={elem + i} className="beer">
+          <Link key={elem + i} to={`/beers/${elem._id}`}>
+            <div className="beer">
               <img
                 src={elem.image_url}
                 alt="beer image"

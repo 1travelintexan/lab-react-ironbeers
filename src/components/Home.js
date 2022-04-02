@@ -16,7 +16,7 @@ class Home extends Component {
           <h2>Random Beer</h2>
         </Link>
         <img src={img3} alt="pic2" width="100%" />
-        <Link to="/newbeer">
+        <Link to="/new-beer">
           <h2>New Beer</h2>
         </Link>
         <img src={img2} alt="pic" width="100%" />
