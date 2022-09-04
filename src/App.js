@@ -9,20 +9,14 @@ import Beers from './components/Beers';
 import NewBeer from './components/New-Beer';
 import SingleBeer from './components/SingleBeer';
 import { useNavigate } from 'react-router-dom';
-import SearchBeer from './components/SearchBeer';
 
 function App() {
   const navigate = useNavigate();
-  // const [beers, setBeers] = useState(null);
   const [filteredBeers, setFilteredBeer] = useState(null);
 
   const handleNewBeer = async (e, newBeer) => {
     e.preventDefault();
-    let response = await axios.post(
-      'https://ih-beers-api2.herokuapp.com/beers/new',
-      newBeer
-    );
-    console.log('here is your new beer', response.data);
+    await axios.post('https://ih-beers-api2.herokuapp.com/beers/new', newBeer);
     navigate('/');
   };
 
