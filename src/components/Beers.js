@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from './Header';
 import SearchBeer from './SearchBeer';
 
 function Beers({ beers, handleFilter }) {
@@ -9,7 +8,6 @@ function Beers({ beers, handleFilter }) {
   }
   return (
     <div>
-      <Header />
       <SearchBeer handleFilter={handleFilter} />
       {beers.map((elem, i) => {
         return (

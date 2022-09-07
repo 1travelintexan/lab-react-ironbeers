@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Header from './Header';
 
 function NewBeer({ handleNewBeer }) {
   const [newBeer, setNewBeer] = useState({
@@ -14,55 +13,62 @@ function NewBeer({ handleNewBeer }) {
 
   function handleChange(e) {
     const value = e.target.value;
+    const name = e.target.name;
     setNewBeer({
       ...newBeer,
-      [e.target.name]: value,
+      [name]: value,
     });
   }
   return (
     <div>
-      <Header />
       <form
         onSubmit={(e) => {
           handleNewBeer(e, newBeer);
         }}
       >
+        <label>Name:</label>
         <input
           type="text"
           name="name"
           value={newBeer.name}
           onChange={handleChange}
         />
+        <label>Tagline:</label>
         <input
           type="text"
           name="tagline"
           value={newBeer.tagline}
           onChange={handleChange}
         />
+        <label>Description:</label>
         <input
           type="text"
           name="description"
           value={newBeer.description}
           onChange={handleChange}
         />
+        <label>First Brewed:</label>
         <input
           type="text"
           name="first_brewed"
           value={newBeer.first_brewed}
           onChange={handleChange}
         />
+        <label>Brewers Tips:</label>
         <input
           type="text"
           name="brewers_tips"
           value={newBeer.brewers_tips}
           onChange={handleChange}
         />
+        <label>Attenuation level:</label>
         <input
-          type="text"
+          type="number"
           name="attenuation_level"
           value={newBeer.attenuation_level}
           onChange={handleChange}
         />
+        <label>Contributed by:</label>
         <input
           type="text"
           name="contributed_by"

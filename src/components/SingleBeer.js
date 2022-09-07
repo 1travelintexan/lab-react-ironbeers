@@ -16,7 +16,7 @@ function SingleBeer() {
       }
       getOne();
     } catch {}
-  }, []);
+  }, [beerId]);
 
   if (!singleBeer) {
     return <h3>Loading...</h3>;

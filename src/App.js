@@ -9,6 +9,7 @@ import Beers from './components/Beers';
 import NewBeer from './components/New-Beer';
 import SingleBeer from './components/SingleBeer';
 import { useNavigate } from 'react-router-dom';
+import OutletComponent from './components/OutletComponent';
 
 function App() {
   const navigate = useNavigate();
@@ -16,8 +17,17 @@ function App() {
 
   const handleNewBeer = async (e, newBeer) => {
     e.preventDefault();
-    await axios.post('https://ih-beers-api2.herokuapp.com/beers/new', newBeer);
-    navigate('/');
+    try {
+      console.log(newBeer);
+      await axios.post(
+        'https://ih-beers-api2.herokuapp.com/beers/new',
+        newBeer
+      );
+      navigate('/');
+    } catch (err) {
+      console.log('There was an error creating your beer', err);
+      navigate('/new-beer');
+    }
   };
 
   useEffect(() => {
@@ -46,16 +56,20 @@ function App() {
     <div className="App">
       <Routes>
         <Route path={'/'} element={<Home />} />
-        <Route
-          path={'/beers'}
-          element={<Beers beers={filteredBeers} handleFilter={handleFilter} />}
-        />
-        <Route path={'/random-beer'} element={<RandomBeer />} />
-        <Route path={'/beers/:beerId'} element={<SingleBeer />} />
-        <Route
-          path={'/new-beer'}
-          element={<NewBeer handleNewBeer={handleNewBeer} />}
-        />
+        <Route element={<OutletComponent />}>
+          <Route
+            path={'/beers'}
+            element={
+              <Beers beers={filteredBeers} handleFilter={handleFilter} />
+            }
+          />
+          <Route path={'/random-beer'} element={<RandomBeer />} />
+          <Route path={'/beers/:beerId'} element={<SingleBeer />} />
+          <Route
+            path={'/new-beer'}
+            element={<NewBeer handleNewBeer={handleNewBeer} />}
+          />
+        </Route>
       </Routes>
     </div>
   );
